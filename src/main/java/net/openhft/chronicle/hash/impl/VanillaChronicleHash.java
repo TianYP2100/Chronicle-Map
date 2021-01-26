@@ -22,6 +22,7 @@ import net.openhft.chronicle.bytes.MappedBytesStoreFactory;
 import net.openhft.chronicle.bytes.NativeBytesStore;
 import net.openhft.chronicle.core.Maths;
 import net.openhft.chronicle.core.OS;
+import net.openhft.chronicle.core.io.AbstractCloseable;
 import net.openhft.chronicle.core.io.ReferenceOwner;
 import net.openhft.chronicle.hash.*;
 import net.openhft.chronicle.hash.impl.util.BuildVersion;
@@ -67,9 +68,8 @@ import static net.openhft.chronicle.hash.impl.CompactOffHeapLinearHashTable.*;
 import static net.openhft.chronicle.map.ChronicleHashCorruptionImpl.format;
 import static net.openhft.chronicle.map.ChronicleHashCorruptionImpl.report;
 
-public abstract class VanillaChronicleHash<K,
-        C extends HashEntry<K>, SC extends HashSegmentContext<K, ?>,
-        ECQ extends ExternalHashQueryContext<K>>
+public abstract class VanillaChronicleHash<K, C extends HashEntry<K>, SC extends HashSegmentContext<K, ?>,
+        ECQ extends ExternalHashQueryContext<K>> extends AbstractCloseable
         implements ChronicleHash<K, C, SC, ECQ>, Marshallable {
 
     public static final long TIER_COUNTERS_AREA_SIZE = 64;
@@ -679,12 +679,15 @@ public abstract class VanillaChronicleHash<K,
         return sizeInBytesWithoutTiers + allocatedExtraTierBulks * tierBulkSizeInBytes;
     }
 
+
     @Override
-    public final void close() {
-        if (resources != null && resources.releaseManually()) {
-            cleanupOnClose();
-        }
+    protected void performClose() {
+        if (resources == null || !resources.releaseManually())
+            return;
+
+        cleanupOnClose();
     }
+
 
     protected void cleanupOnClose() {
         // Releases nothing after resources.releaseManually(), only removes the cleaner
@@ -698,6 +701,11 @@ public abstract class VanillaChronicleHash<K,
         keyDataAccess = null;
     }
 
+    /**
+     * @return true if has not been closed
+     * @deprecated use !net.openhft.chronicle.core.io.AbstractCloseable#isClosed()
+     */
+    @Deprecated(/*deprecated in x.23*/)
     @Override
     public boolean isOpen() {
         throwExceptionIfClosed();
