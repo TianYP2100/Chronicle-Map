@@ -18,7 +18,6 @@ package net.openhft.chronicle.map;
 
 import net.openhft.chronicle.algo.bitset.ReusableBitSet;
 import net.openhft.chronicle.algo.hashing.LongHashFunction;
-import net.openhft.chronicle.analytics.Analytics;
 import net.openhft.chronicle.bytes.Bytes;
 import net.openhft.chronicle.bytes.BytesStore;
 import net.openhft.chronicle.bytes.PointerBytesStore;
@@ -49,8 +48,6 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiFunction;
