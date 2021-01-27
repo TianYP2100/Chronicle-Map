@@ -24,6 +24,7 @@ import net.openhft.chronicle.map.MapSegmentContext;
 import net.openhft.chronicle.threads.NamedThreadFactory;
 import net.openhft.chronicle.values.Values;
 import org.apache.commons.lang3.mutable.MutableDouble;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.concurrent.ExecutionException;
@@ -31,6 +32,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
+@Ignore
 public class PortfolioValueTest {
     private static final boolean useIterator = true;
     private static final long nAssets = 10_000_000;
