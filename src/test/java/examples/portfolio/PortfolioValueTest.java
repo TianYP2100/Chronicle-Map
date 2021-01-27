@@ -16,6 +16,7 @@
 
 package examples.portfolio;
 
+import net.openhft.chronicle.core.Jvm;
 import net.openhft.chronicle.core.values.LongValue;
 import net.openhft.chronicle.map.ChronicleMap;
 import net.openhft.chronicle.map.ChronicleMapBuilder;
@@ -35,6 +36,10 @@ public class PortfolioValueTest {
     private static final long nAssets = 10_000_000;
     private static final int nThreads = Runtime.getRuntime().availableProcessors();
     private static final int nRepetitions = 11; // 10 for computing average, throwing away the first one (warmup)
+
+    static {
+        Jvm.init();
+    }
 
     private static void computeValue(final ChronicleMap<LongValue, PortfolioAssetInterface> cache) throws ExecutionException, InterruptedException {
         computeValueUsingIterator(cache);
