@@ -17,6 +17,7 @@
 package net.openhft.chronicle.map;
 
 import com.google.common.collect.ImmutableSet;
+import net.openhft.chronicle.core.Jvm;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
 
@@ -30,6 +31,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class NestedContextsTest {
+
+    static {
+        Jvm.init();
+    }
 
     private static void verifyGraphConsistent(ChronicleMap<Integer, Set<Integer>> graph) {
         graph.forEach((node, neighbours) ->

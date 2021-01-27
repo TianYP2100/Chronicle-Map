@@ -16,6 +16,7 @@
 
 package net.openhft.chronicle.map;
 
+import net.openhft.chronicle.core.Jvm;
 import net.openhft.chronicle.hash.Data;
 import org.jetbrains.annotations.NotNull;
 import org.junit.Test;
@@ -34,6 +35,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 public class BiMapTest {
+
+    static {
+        Jvm.init();
+    }
 
     private static <K, V> void verifyBiMapConsistent(Map<K, V> m1, Map<V, K> m2) {
         assertEquals(m1.size(), m2.size());

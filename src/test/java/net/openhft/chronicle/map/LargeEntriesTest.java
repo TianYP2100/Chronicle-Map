@@ -16,6 +16,7 @@
 
 package net.openhft.chronicle.map;
 
+import net.openhft.chronicle.core.Jvm;
 import net.openhft.chronicle.threads.NamedThreadFactory;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -33,6 +34,10 @@ import static org.junit.Assert.*;
  * Created by peter.lawrey on 06/12/14.
  */
 public class LargeEntriesTest {
+
+    static {
+        Jvm.init();
+    }
 
     @Test
     public void testLargeStrings() throws ExecutionException, InterruptedException, IOException {
