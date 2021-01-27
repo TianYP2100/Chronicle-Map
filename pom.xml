@@ -7,7 +7,7 @@
         <groupId>net.openhft</groupId>
         <artifactId>java-parent-pom</artifactId>
         <version>1.1.24</version>
-        <relativePath />
+        <relativePath/>
     </parent>
 
     <artifactId>chronicle-map</artifactId>
@@ -15,7 +15,8 @@
     <version>3.21ea2-SNAPSHOT</version>
     <name>OpenHFT/Chronicle-Map</name>
     <description>Chronicle-Map</description>
-   
+    <packaging>bundle</packaging>
+
     <dependencyManagement>
         <dependencies>
 
@@ -268,7 +269,7 @@
         </resources>
 
         <plugins>
-        <!--    <plugin>
+            <plugin>
                 <groupId>net.openhft</groupId>
                 <artifactId>binary-compatibility-enforcer-plugin</artifactId>
                 <version>1.0.7</version>
@@ -364,10 +365,10 @@
                     <additionalOptions>-Xdoclint:none</additionalOptions>
                 </configuration>
             </plugin>
--->
+
             <!-- used to allow getClass().getPackage().getImplementationVersion() -->
 
-     <!--       <plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
@@ -379,7 +380,7 @@
                     </archive>
                 </configuration>
 
-            </plugin>-->
+            </plugin>
             <!--
                 generate maven dependencies versions file that can be used later
                 to install the right bundle in test phase.
@@ -388,7 +389,7 @@
 
                     target/classes/META-INF/maven/dependencies.properties
             -->
-        <!--    <plugin>
+            <plugin>
                 <groupId>org.apache.servicemix.tooling</groupId>
                 <artifactId>depends-maven-plugin</artifactId>
                 <executions>
@@ -399,8 +400,8 @@
                         </goals>
                     </execution>
                 </executions>
-            </plugin>-->
-           <!-- <plugin>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <extensions>true</extensions>
@@ -421,10 +422,10 @@
                     </instructions>
                 </configuration>
                 <executions>
-                    &lt;!&ndash;
+                    <!--
                       This execution makes sure that the manifest is available
                       when the tests are executed
-                    &ndash;&gt;
+                    -->
                     <execution>
                         <goals>
                             <goal>manifest</goal>
@@ -432,8 +433,8 @@
                     </execution>
                 </executions>
             </plugin>
--->
-           <!-- <plugin>
+
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.0.0</version>
@@ -449,7 +450,7 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>-->
+            </plugin>
 
             <!-- Enable again once TC works-->
 <!--
