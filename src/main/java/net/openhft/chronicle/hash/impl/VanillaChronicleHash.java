@@ -69,7 +69,7 @@ import static net.openhft.chronicle.map.ChronicleHashCorruptionImpl.format;
 import static net.openhft.chronicle.map.ChronicleHashCorruptionImpl.report;
 
 public abstract class VanillaChronicleHash<K, C extends HashEntry<K>, SC extends HashSegmentContext<K, ?>,
-        ECQ extends ExternalHashQueryContext<K>> extends AbstractCloseable
+        ECQ extends ExternalHashQueryContext<K>>
         implements ChronicleHash<K, C, SC, ECQ>, Marshallable {
 
     public static final long TIER_COUNTERS_AREA_SIZE = 64;
@@ -681,13 +681,11 @@ public abstract class VanillaChronicleHash<K, C extends HashEntry<K>, SC extends
 
 
     @Override
-    protected void performClose() {
-        if (resources == null || !resources.releaseManually())
-            return;
-
-        cleanupOnClose();
+    public final void close() {
+        if (resources != null && resources.releaseManually()) {
+            cleanupOnClose();
+        }
     }
-
 
     protected void cleanupOnClose() {
         // Releases nothing after resources.releaseManually(), only removes the cleaner
